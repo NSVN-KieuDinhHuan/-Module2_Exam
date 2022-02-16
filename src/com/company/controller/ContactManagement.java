@@ -43,7 +43,7 @@ public class ContactManagement implements ReadFile,WriteFile{
         }
     }
 
-    public void displayAllContacts() throws IOException, ClassNotFoundException {
+    public void displayAllContacts() {
         if (contactList.size()>0){
             for (int i = 0; i < contactList.size(); i++) {
                 System.out.println(contactList.get(i));
@@ -114,7 +114,7 @@ public class ContactManagement implements ReadFile,WriteFile{
         oos.writeObject(this.contactList);
     }
 
-    public void readFileCSV(String path) throws IOException, ClassNotFoundException {
+    public void readFileCSV(String path) throws IOException {
         File file = new File(path);
         FileReader fileReader = new FileReader(file);
         BufferedReader reader = new BufferedReader(fileReader);

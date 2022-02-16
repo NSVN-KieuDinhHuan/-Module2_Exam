@@ -116,13 +116,14 @@ public class Main {
 
     public static Contact inputContact(){
         System.out.println("Nhập thông tin của Danh bạ");
-        System.out.println("số điện thoai:");
+        System.out.println("số điện thoai (bắt buộc): có 10 chữ số băt đâu băng 0");
         String phoneNumberRegex="0[\\d]{9}";
         String phoneNumber = InputRegex(phoneNumberRegex);
         System.out.println("Nhập Nhóm danh bạ:");
         String contactGroup = scanner.nextLine();
-        System.out.println("Họ Tên:");
-        String name=scanner.nextLine();
+        System.out.println("Họ Tên:(băt buộc)");
+        String NameRegex="^([a-z]+)((\\s{1}[a-z]+){1,})$";
+        String name=InputRegex(NameRegex);;
         System.out.println("Nhập giới tính");
         String sex = scanner.nextLine();
         System.out.println("Nhập địa chỉ");
@@ -130,7 +131,7 @@ public class Main {
         System.out.println("Nhập ngày Sinh");
         String dateOfBirth=scanner.nextLine();
         String emailRegex= "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
-        System.out.println("Nhập Email");
+        System.out.println("Nhập Email(bắt buộc):");
         String email = InputRegex(emailRegex);
         return new Contact(phoneNumber,contactGroup,name,sex,adress,dateOfBirth,email);
     }
