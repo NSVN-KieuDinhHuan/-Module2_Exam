@@ -5,10 +5,13 @@ import com.company.model.Contact;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public  static Scanner scanner =new Scanner(System.in);
     private static final String CONTACTCSV= "data/contacts.csv";
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         int choice = -1; //Để nhập lựa chọn của người dùng
         ContactManagement contactManagement =ContactManagement.getContactManagement();
@@ -114,8 +117,8 @@ public class Main {
     public static Contact inputContact(){
         System.out.println("Nhập thông tin của Danh bạ");
         System.out.println("số điện thoai:");
-
-        String phoneNumber = scanner.nextLine();
+        String phoneNumberRegex="0[\\d]{9}";
+        String phoneNumber = InputRegex(phoneNumberRegex);
         System.out.println("Nhập Nhóm danh bạ:");
         String contactGroup = scanner.nextLine();
         System.out.println("Họ Tên:");
@@ -126,13 +129,26 @@ public class Main {
         String adress=scanner.nextLine();
         System.out.println("Nhập ngày Sinh");
         String dateOfBirth=scanner.nextLine();
+        String emailRegex= "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
         System.out.println("Nhập Email");
-        String email=scanner.nextLine();
+        String email = InputRegex(emailRegex);
         return new Contact(phoneNumber,contactGroup,name,sex,adress,dateOfBirth,email);
     }
 
-
-
+    private static String InputRegex(String regex) {
+        boolean isvalid=false;
+        String input="";
+        do {
+            input=scanner.nextLine();
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(input);
+            isvalid = matcher.matches();
+            if (isvalid==false){
+                System.err.println("Nhập lại, Sai định dạng");
+            }
+        }while (isvalid==false);
+        return input;
+    }
 
     public static void menu() {
         System.out.println("---TRƯƠNG TRÌNH QUẢN LÝ DANH BẠ---");
